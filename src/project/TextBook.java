@@ -7,13 +7,15 @@ import java.util.Scanner;
 
 public class TextBook extends ManageBook {
 	private int ma_so;
+	private String ten_sach;
 	private int so_luong;
 	private int don_gia;
 	private String nha_xuat_ban;
 	private String trang_thai;
 	
-	public TextBook(int ma_so, int so_luong,int don_gia,String nha_xuat_ban,String trang_thai) {
+	public TextBook(int ma_so,String ten_sach, int so_luong,int don_gia,String nha_xuat_ban,String trang_thai) {
 		this.ma_so = ma_so;
+		this.ten_sach = ten_sach;
 		this.so_luong = so_luong;
 		this.don_gia = don_gia;
 		this.nha_xuat_ban = nha_xuat_ban;
@@ -26,6 +28,14 @@ public class TextBook extends ManageBook {
 	public void setMa_so(int ma_so) {
 		this.ma_so = ma_so;
 	}
+	public String getTen_sach() {
+		return ten_sach;
+	}
+
+	public void setTen_sach(String ten_sach) {
+		this.ten_sach = ten_sach;
+	}
+	
 	public int getSo_luong() {
 		return so_luong;
 	}
@@ -58,10 +68,12 @@ public class TextBook extends ManageBook {
 		ArrayList<TextBook> danhsach = new ArrayList<TextBook>();
 		for(int i=1; i<=n;i++) {
 			input.nextLine();
-			TextBook x = new TextBook(ma_so,so_luong,don_gia,nha_xuat_ban,trang_thai);
+			TextBook x = new TextBook(ma_so,ten_sach,so_luong,don_gia,nha_xuat_ban,trang_thai);
 			System.out.println("Nhap thong tin sach thu "+i);
 			System.out.println("Nhap ma so cua sach giao khoa:");
 			x.ma_so = input.nextInt();
+			System.out.println("Nhap ten sach:");
+			x.ten_sach = input.nextLine();
 			System.out.println("Nhap so luong sach:");
 			x.so_luong = input.nextInt();
 			System.out.println("Nhap don gia cua sach:");
@@ -88,7 +100,23 @@ public class TextBook extends ManageBook {
         for (int i = 0; i < danhsach.size(); i++) {
             System.out.println("Ma: " + danhsach.get(i).ma_so + " don gia: " + danhsach.get(i).don_gia);
         }
+        
+        String tenSach;
+        int count = 0;
+        System.out.println("Nhap ten sach can tim:");
+        tenSach = input.nextLine();
+        for(int i = 0; i < danhsach.size(); i++) {
+        	if(danhsach.get(i).getTen_sach().equals(tenSach)) {
+        		danhsach.get(i).display();
+        		count ++;
+        	}
+        	
+        	if(count == 0) {
+        		System.out.println("Khong co ten sach ma ban can tim!!!");
+        	}
+        }
 		
 	}
+
 	
 }

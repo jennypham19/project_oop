@@ -9,11 +9,13 @@ import project.ScienceMagazine;
 
 public class ScienceMagazine extends ManageBook {
 	private int ma_so;
+	private String ten_sach;
 	private String nha_xuat_ban;
 	private int don_gia;
 	
-	public ScienceMagazine(int ma_so,String nha_xuat_ban,int don_gia) {
+	public ScienceMagazine(int ma_so,String ten_sach,String nha_xuat_ban,int don_gia) {
 		this.ma_so = ma_so;
+		this.ten_sach = ten_sach;
 		this.nha_xuat_ban = nha_xuat_ban;
 		this.don_gia = don_gia;
 	}
@@ -25,7 +27,13 @@ public class ScienceMagazine extends ManageBook {
 	public void setMa_so(int ma_so) {
 		this.ma_so = ma_so;
 	}
+	public String getTen_sach() {
+		return ten_sach;
+	}
 
+	public void setTen_sach(String ten_sach) {
+		this.ten_sach = ten_sach;
+	}
 	public String getNha_xuat_ban() {
 		return nha_xuat_ban;
 	}
@@ -49,10 +57,12 @@ public class ScienceMagazine extends ManageBook {
 		ArrayList <ScienceMagazine> danhSach = new ArrayList<ScienceMagazine>();
 		for(int i = 1; i< n;i++) {
 			input.nextLine();
-			ScienceMagazine x = new ScienceMagazine(ma_so,nha_xuat_ban,don_gia);
+			ScienceMagazine x = new ScienceMagazine(ma_so,ten_sach,nha_xuat_ban,don_gia);
 			System.out.println("Thong tin sach thu "+ i);
 			System.out.println("Ma so cua sach khoa hoc: ");
 			x.ma_so = input.nextInt();
+			System.out.println("Nhap ten sach:");
+			x.ten_sach = input.nextLine();
 			System.out.println("Nha xuat ban sach : ");
 			x.nha_xuat_ban = input.nextLine();
 			System.out.println("Don gia cua sach:");
@@ -77,5 +87,21 @@ public class ScienceMagazine extends ManageBook {
         for (int i = 0; i < danhSach.size(); i++) {
             System.out.println("Ma: " + danhSach.get(i).ma_so + " don gia: " + danhSach.get(i).don_gia);
         }
+        
+        String tenSach;
+        int count = 0;
+        System.out.println("Nhap ten sach can tim:");
+        tenSach = input.nextLine();
+        for(int i=0;i<danhSach.size();i++) {
+        	if(danhSach.get(i).getTen_sach().equals(tenSach)) {
+        		danhSach.get(i).display();
+        		count ++;
+        	}
+        	if(count == 0) {
+        		System.out.println("Khong co ten sach ma ban can tim!!!");
+        	}
+        }
 	}
+
+	
 }
