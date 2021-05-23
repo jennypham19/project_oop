@@ -1,12 +1,27 @@
 package project;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
 public class ReferenceBook extends ManageBook {
 	private int ma_so;
 	private int so_luong;
 	private String nha_xuat_ban;
 	private String tac_gia;
-	private String don_gia;
+	private int don_gia;
 	private float thue;
+	
+	public ReferenceBook(int ma_so,int so_luong,String nha_xuat_ban,String tac_gia,int don_gia,float thue) {
+		this.ma_so = ma_so;
+		this.so_luong = so_luong;
+		this.nha_xuat_ban = nha_xuat_ban;
+		this.tac_gia = tac_gia;
+		this.don_gia = don_gia;
+		this.thue = thue;
+	}
+	
 	public int getMa_so() {
 		return ma_so;
 	}
@@ -31,10 +46,10 @@ public class ReferenceBook extends ManageBook {
 	public void setTac_gia(String tac_gia) {
 		this.tac_gia = tac_gia;
 	}
-	public String getDon_gia() {
+	public int getDon_gia() {
 		return don_gia;
 	}
-	public void setDon_gia(String don_gia) {
+	public void setDon_gia(int don_gia) {
 		this.don_gia = don_gia;
 	}
 	public float getThue() {
@@ -45,8 +60,44 @@ public class ReferenceBook extends ManageBook {
 	}
 	@Override
 	public void display() {
-		
-		
+		Scanner input = new Scanner(System.in);
+		System.out.println("Nhap so sach tham khao:");
+		int n = input.nextInt();
+		ArrayList<ReferenceBook> danhsach = new ArrayList<ReferenceBook>();
+		for(int i=1;i<=n;i++) {
+			input.nextLine();
+			System.out.println("Nhap thong tin sach thu "+i);
+			ReferenceBook x = new ReferenceBook(ma_so,so_luong,nha_xuat_ban,tac_gia,don_gia,thue);
+			System.out.println("Nhap ma so cua sach tham khao:");
+			x.ma_so = input.nextInt();
+			System.out.println("Nhap so luong cua sach:");
+			x.so_luong = input.nextInt();
+			System.out.println("Nhap nha xuat ban:");
+			x.nha_xuat_ban = input.nextLine();
+			System.out.println("Nhap tac gia cua sach:");
+			x.tac_gia = input.nextLine();
+			System.out.println("Nhap don gia cua sach:");
+			x.don_gia = input.nextInt();
+			System.out.println("Nhap thue phai tra cho tung quyen sach:");
+			x.thue = input.nextFloat();
+			danhsach.add(x);	
+		}
+		Collections.sort(danhsach, new Comparator<ReferenceBook>() {
+			@Override
+			public int compare(ReferenceBook rb1, ReferenceBook rb2) {
+				if(rb1.don_gia < rb2.don_gia) {
+					return 1;
+				}else if(rb1.don_gia == rb2.don_gia) {
+					return 0;
+				}else {
+					return -1;
+				}
+			}
+		});
+		System.out.println("Danh sach sap xep theo thu tu don gia giam dan cua sach tham khao la: ");
+        for (int i = 0; i < danhsach.size(); i++) {
+            System.out.println("Ma: " + danhsach.get(i).ma_so + " don gia: " + danhsach.get(i).don_gia);
+        }
 	}
 
 }
